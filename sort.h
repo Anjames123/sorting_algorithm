@@ -12,15 +12,11 @@
  */
 typedef struct listint_s
 {
-<<<<<<< HEAD
+
 	const int n;
 	struct listint_s *prev;
 	struct listint_s *next;
-=======
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
->>>>>>> 89985ec1e9f912988d2bb3972ed42e074e7ae3a9
+
 } listint_t;
 
 void print_array(const int *array, size_t size);
