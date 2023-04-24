@@ -1,47 +1,46 @@
-#include <stdio.h>
 #include "sort.h"
 
 /**
- * bubble_sort - Sorts an array of integers in ascending order
- * using the Bubble sort algorithm
- *
- * @array: The array to be sorted
- * @size: The size of the array
+ * swap_ints - Swaps the positions of two elements in an array.
+ * @a: The first element to be swapped.
+ * @b: The second element to be swapped.
  */
-void bubble_sort(int *array, size_t size)
+void swap_ints(int *a, int *b)
 {
-	size_t i, j;
 	int tmp;
-	int swapped;
 
-	for (i = 0; i < size - 1; i++)
-	{
-		swapped = 0;
-		for (j = 0; j < size - i - 1; j++)
-		{
-			if (array[j] > array[j + 1])
-			{
-				tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-				swapped = 1;
-				print_array(array, size);
-			}
-		}
-		if (swapped == 0)
-			break;
-	}
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
- * swap - swaps two elements
- * @a: first element
- * @b: second element
+ * selection_sort - Sorts an array of integers in ascending order
+ * using the Selection sort algorithm
+ * @array: The array to be sorted
+ * @size: The size of the array
+ *
  */
-void swap(int *a, int *b)
+void bubble_sort(int *array, size_t size)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
+	size_t i, len = size;
+	bool bubbly = false;
 
+	if (array == NULL || size < 2)
+		return;
+
+	while (bubbly == false)
+	{
+		bubbly = true;
+		for (i = 0; i < len - 1; i++)
+		{
+			if (array[i] > array[i + 1])
+			{
+				swap_ints(array + i, array + i + 1);
+				print_array(array, size);
+				bubbly = false;
+			}
+		}
+		len--;
+	}
+}
