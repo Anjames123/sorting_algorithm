@@ -2,7 +2,7 @@
 
 /**
  * merge - Merges two subarrays of an array
- *  
+ *
  *  @array: Pointer to the array
  *  @size: Size of the array
  *  @left: Pointer to the left subarray
@@ -12,7 +12,8 @@
  *
  *  Return: Void
  */
-void merge(int *array, size_t size, int *left, size_t left_size, int *right, size_t right_size)
+void merge(int *array, size_t size, int *left, size_t left_size,
+	       int *right, size_t right_size)
 {
 	int i, j, k;
 	int *merged = malloc(size * sizeof(int));
@@ -26,7 +27,6 @@ void merge(int *array, size_t size, int *left, size_t left_size, int *right, siz
 	i = 0;
 	j = 0;
 	k = 0;
-
 	while (i < (int)left_size && j < (int)right_size)
 	{
 		if (left[i] <= right[j])
@@ -41,26 +41,18 @@ void merge(int *array, size_t size, int *left, size_t left_size, int *right, siz
 		}
 		k++;
 	}
-
 	while (i < (int)left_size)
 	{
-		merged[k] = left[i];
-		i++;
-		k++;
+		merged[k] = left[i], i++, k++;
 	}
-
 	while (j < (int)right_size)
 	{
-		merged[k] = right[j];
-		j++;
-		k++;
+		merged[k] = right[j], j++, k++;
 	}
-
 	for (i = 0; i < (int)size; i++)
 	{
 		array[i] = merged[i];
 	}
-
 	printf("[Done]: ");
 	print_array(array, size);
 }
