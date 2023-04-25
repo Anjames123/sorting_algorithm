@@ -44,7 +44,7 @@ void compare_and_swap(int *array, int i, int j, int direction)
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
  */
-void bitonic_merge(int *array, int start, int count, int direction)
+void bitonic_merge(int *array, int start, int count, int direction, const int int_size)
 {
 	if (count > 1)
 	{
@@ -54,8 +54,8 @@ void bitonic_merge(int *array, int start, int count, int direction)
 		for (i = start; i < start + k; i++)
 			compare_and_swap(array, i, i + k, direction);
 
-		bitonic_merge(array, start, k, direction);
-		bitonic_merge(array, start + k, k, direction);
+		bitonic_merge(array, start, k, direction, int_size);
+		bitonic_merge(array, start + k, k, direction, int_size);
 	}
 }
 
@@ -66,24 +66,34 @@ void bitonic_merge(int *array, int start, int count, int direction)
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
  */
-void bitonicSort(int *array, int start, int count, int direction)
+void bitonicSort(int *array, int start, int count, int direction, const int int_size)
 {
-	int k = count / 2;
+	int k = count;
 
 	if (count > 1)
 	{
-		printf("Merging [%d/%d] (%s):\n", count, (int)count * 2,
-				direction == 1 ? "UP" : "DOWN");
+		if (direction == 1)
+			printf("Merging [%d/%d] (UP):\n", count, int_size);
+		if (direction == 0)
+			printf("Merging [%d/%d] (DOWN):\n", count, int_size);
 		print_range(array, start, start + k - 1);
 
-		bitonicSort(array, start, k, 1);
-		bitonicSort(array, start + k, k, 0);
+		k = count / 2;
+		bitonicSort(array, start, k, 1, int_size);
 
-		bitonic_merge(array, start, count, direction);
+		bitonicSort(array, start + k, k, 0, int_size);
 
-		printf("Result [%d/%d] (%s):\n", count, (int)count * 2,
-				direction == 1 ? "UP" : "DOWN");
-		print_range(array, start, start + k * 2 - 1);
+		bitonic_merge(array, start, count, direction, int_size);
+		if (direction == 1)
+		{
+			printf("Result [%d/%d] (UP):\n", count, int_size);
+			print_range(array, start, start + 2 * k - 1);
+		}
+		if (direction == 0)
+		{
+			printf("Result [%d/%d] (DOWN):\n", count, int_size);
+			print_range(array, start, start + 2 * k - 1);
+		}
 	}
 }
 
@@ -95,8 +105,9 @@ void bitonicSort(int *array, int start, int count, int direction)
 void bitonic_sort(int *array, size_t size)
 {
 	int direction = 1;
+	const int int_size = (int)size;
 	if (size < 2 || !array)
 		return;
 
-	bitonicSort(array, 0, size, direction);
+	bitonicSort(array, 0, (int)size, direction, int_size);
 }
