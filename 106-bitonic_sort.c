@@ -21,30 +21,36 @@ void print_range(int *array, int start, int end)
 }
 
 /**
- * compare_and_swap - swaps two elements in an array if they are in the wrong order
+ * compare_and_swap - swaps two elements in an array
+ * if they are in the wrong order
  * @array: the array
  * @i: the first index
  * @j: the second index
- * @direction: the sorting direction (1 for ascending, 0 for descending)
+ * @direction: the sorting direction
+ * (1 for ascending, 0 for descending)
  */
 void compare_and_swap(int *array, int i, int j, int direction)
 {
 	if (direction == (array[i] > array[j]))
 	{
 		int temp = array[i];
+
 		array[i] = array[j];
 		array[j] = temp;
 	}
 }
 
 /**
- * bitonic_merge - recursively merges two bitonic sequences in the given direction
+ * bitonic_merge - recursively merges two bitonic
+ * sequences in the given direction
  * @array: the array
  * @start: the start index of the first bitonic sequence
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
+ * @int_size: The size of the array
  */
-void bitonic_merge(int *array, int start, int count, int direction, const int int_size)
+void bitonic_merge(int *array, int start, int count,
+		int direction, const int int_size)
 {
 	if (count > 1)
 	{
@@ -60,13 +66,16 @@ void bitonic_merge(int *array, int start, int count, int direction, const int in
 }
 
 /**
- * bitonicSort - recursively sorts a bitonic sequence in the given direction
+ * bitonicSort - recursively sorts a bitonic sequence
+ * in the given direction
  * @array: the array
  * @start: the start index of the bitonic sequence
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
+ * @int_size: The size of the array
  */
-void bitonicSort(int *array, int start, int count, int direction, const int int_size)
+void bitonicSort(int *array, int start, int count,
+		int direction, const int int_size)
 {
 	int k = count;
 
@@ -104,8 +113,11 @@ void bitonicSort(int *array, int start, int count, int direction, const int int_
  */
 void bitonic_sort(int *array, size_t size)
 {
+
 	int direction = 1;
+
 	const int int_size = (int)size;
+
 	if (size < 2 || !array)
 		return;
 
