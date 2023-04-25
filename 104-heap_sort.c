@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include "sort.h"
 
+/**
+ * swap_integers - Swaps two integers in an array
+ *
+ * @a: Pointer to the first integer to be swapped
+ * @b: Pointer to the second integer to be swapped
+ *
+ * This function swaps the values of two integers in an array.
+ */
+void swap_integers(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
 /**
  * sift_down - Repair the heap whose root element is at index 'start'.
@@ -12,13 +26,6 @@
  *
  * Return: void.
  */
-void swap_integers(int *a, int *b)
-{
-       	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
 static void sift_down(int *array, size_t start, size_t end, size_t size)
 {
 	size_t root = start, child, swap;
