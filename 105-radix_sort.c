@@ -40,13 +40,10 @@ void count_sort(int *array, size_t size, int exp)
 	output = malloc(size * sizeof(int));
 	if (!output)
 		return;
-	
 	for (i = 0; i < size; i++)
 		count[(array[i] / exp) % 10]++;
-
 	for (i = 1; i < 10; i++)
 		count[i] += count[i - 1];
-
 	for (i = size - 1; (int)i >= 0; i--)
 	{
 		output[count[(array[i] / exp) % 10] - 1] = array[i];
