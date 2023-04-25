@@ -1,83 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 
 /**
- * merge - Merges two subarrays of an array
- *
- *  @array: Pointer to the array
- *  @size: Size of the array
- *  @left: Pointer to the left subarray
- *  @left_size: Size of the left subarray
- *  @right: Pointer to the right subarray
- *  @right_size: Size of the right subarray
- *
- *  Return: Void
+ * merge - Merge two subarrays of arr[]
+ * @array: Pointer to the array to be sorted
+ * @temp: Pointer to temporary array
+ * @left: Starting index of left subarray
+ * @mid: Middle index of the subarray
+ * @right: Ending index of right subarray
  */
-void merge(int *array, size_t size, int *left, size_t left_size,
-	       int *right, size_t right_size)
+void merge(int *array, int *temp, int left, int mid, int right)
 {
 	int i, j, k;
-	int *merged = malloc(size * sizeof(int));
 
-	printf("Merging...\n");
-	printf("[left]: ");
-	print_array(left, left_size);
-	printf("[right]: ");
-	print_array(right, right_size);
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < (int)left_size && j < (int)right_size)
+	for (i = left, j = mid + 1, k = left; i <= mid && j <= right; k++)
 	{
-		if (left[i] <= right[j])
+		if (array[i] <= array[j])
 		{
-			merged[k] = left[i];
+			temp[k] = array[i];
 			i++;
-		}
-		else
+		} else
 		{
-			merged[k] = right[j];
+			temp[k] = array[j];
 			j++;
 		}
+	}
+	while (i <= mid)
+	{
+		temp[k] = array[i];
+		i++;
 		k++;
 	}
-	while (i < (int)left_size)
+	while (j <= right)
 	{
-		merged[k] = left[i], i++, k++;
+		temp[k] = array[j];
+		j++;
+		k++;
 	}
-	while (j < (int)right_size)
+	for (i = left; i <= right; i++)
 	{
-		merged[k] = right[j], j++, k++;
+		array[i] = temp[i];
 	}
-	for (i = 0; i < (int)size; i++)
-	{
-		array[i] = merged[i];
-	}
-	printf("[Done]: ");
-	print_array(array, size);
 }
 
 /**
- * merge_sort - Sorts an array of integers in ascending order using
- *               the Merge sort algorithm
- *
- *               @array: Pointer to the array
- *               @size: Size of the array
- *
- *               Return: Void
+ * merge_sort_helper - Helper function to sort an array of integers
+ * using the Merge Sort algorithm
+ * @array: Pointer to the array to be sorted
+ * @temp: Pointer to temporary array
+ * @left: Starting index of the subarray
+ * @right: Ending index of the subarray
+ */
+void merge_sort_helper(int *array, int *temp, int left, int right)
+{
+	if (left < right)
+	{
+		int mid = (left + right) / 2;
+
+		merge_sort_helper(array, temp, left, mid);
+		merge_sort_helper(array, temp, mid + 1, right);
+
+		printf("Merging...\n");
+		printf("[left]: ");
+		print_array(&array[left], mid - left + 1);
+		printf("[right]: ");
+		print_array(&array[mid + 1], right - mid);
+		merge(array, temp, left, mid, right);
+		printf("[Done]: ");
+		print_array(&array[left], right - left + 1);
+	}
+}
+
+/**
+ * merge_sort - Sorts an array of integers in ascending order using the
+ * Merge Sort algorithm
+ * @array: Pointer to the array to be sorted
+ * @size: Size of the array
  */
 void merge_sort(int *array, size_t size)
 {
-	if (size > 1)
-	{
-		size_t mid = size / 2;
-		int *left = array;
-		int *right = array + mid;
-		size_t left_size = mid;
-		size_t right_size = size - mid;
+	int *temp = malloc(sizeof(int) * size);
 
-		merge_sort(left, left_size);
-		merge_sort(right, right_size);
-		merge(array, size, left, left_size, right, right_size);
+	if (temp == NULL)
+	{
+		return;
 	}
+
+	merge_sort_helper(array, temp, 0, size - 1);
+
+	free(temp);
 }
