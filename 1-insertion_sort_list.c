@@ -2,11 +2,10 @@
 #include <stdio.h>
 
 /**
+ * len_list - find the length of the list.
  *
- * len_list - find the length of the list
- *
- * @h: the list
- * Return: length
+ * @h: the list.
+ * Return: length of the list.
  */
 int len_list(listint_t *h)
 {
@@ -17,7 +16,7 @@ int len_list(listint_t *h)
 		len++;
 		h = h->next;
 	}
-	return len;
+	return (len);
 }
 
 /**
@@ -51,7 +50,7 @@ void insertion_sort_list(listint_t **list)
 
 			if (swap->prev == NULL)
 				*list = swap;
-			
+
 			print_list(*list);
 
 
