@@ -27,6 +27,8 @@ void print_array(const int *array, size_t size);
 /* Helper functions */
 void swap(int *a, int *b);
 int len_list(listint_t *h);
+int lomuto_partition(int *array, int low, int high, size_t size);
+void quicksort_helper(int *array, int low, int high, size_t size);
 
 /* Sorting Algorithm functions */
 void bubble_sort(int *array, size_t size);
