@@ -4,11 +4,10 @@
 
 /**
  * get_max - Returns the maximum value in an array
- *
- * @array: Pointer to the array to search
+ * @array: Array of integers
  * @size: Size of the array
  *
- * Return: The maximum value in the array
+ * Return: Maximum value in the array
  */
 int get_max(int *array, size_t size)
 {
@@ -25,60 +24,59 @@ int get_max(int *array, size_t size)
 }
 
 /**
- * count_sort - Sorts an array of integers using the count sort algorithm
- *
- * @array: Pointer to the array to sort
+ * count_sort - Sorts an array using the count sort algorithm
+ * @array: Array of integers
  * @size: Size of the array
- * @exp: The exponent of the current digit being sorted
+ * @exp: Current significant digit to sort by
+ *
+ * Return: Nothing
  */
 void count_sort(int *array, size_t size, int exp)
 {
-	int *output, *count, i;
-	size_t j;
+	int *output;
+	int count[10] = {0};
+	size_t i;
 
 	output = malloc(size * sizeof(int));
-	if (output == NULL)
+	if (!output)
 		return;
-
-	count = calloc(10, sizeof(int));
-	if (count == NULL)
-	{
-		free(output);
-		return;
-	}
-
-	for (j = 0; j < size; j++)
-		count[(array[j] / exp) % 10]++;
+	
+	for (i = 0; i < size; i++)
+		count[(array[i] / exp) % 10]++;
 
 	for (i = 1; i < 10; i++)
 		count[i] += count[i - 1];
 
-	for (i = size - 1; i >= 0; i--)
+	for (i = size - 1; (int)i >= 0; i--)
 	{
 		output[count[(array[i] / exp) % 10] - 1] = array[i];
 		count[(array[i] / exp) % 10]--;
 	}
 
-	for (j = 0; j < size; j++)
-		array[j] = output[j];
-
-	print_array(array, size);
+	for (i = 0; i < size; i++)
+		array[i] = output[i];
 
 	free(output);
-	free(count);
 }
 
 /**
- * radix_sort - Sorts an array of integers using the LSD radix sort algorithm
- *
- * @array: Pointer to the array to sort
+ * radix_sort - Sorts an array using the LSD radix sort algorithm
+ * @array: Array of integers
  * @size: Size of the array
+ *
+ *  Return: Nothing
  */
 void radix_sort(int *array, size_t size)
 {
-	int max = get_max(array, size);
-	int exp;
+	int max, exp;
+
+	if (!array || size < 2)
+		return;
+	max = get_max(array, size);
 
 	for (exp = 1; max / exp > 0; exp *= 10)
+	{
 		count_sort(array, size, exp);
+		print_array(array, size);
+	}
 }
