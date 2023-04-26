@@ -63,8 +63,8 @@ void qsort_recursive(int *array, int low, int high, size_t size)
  *                    Lomuto partition scheme.
  *
  * @array: The array to partition.
- * @low:   The lowest index of the partition to sort.
- * @high:  The highest index of the partition to sort.
+ * @lower:   The lowest index of the partition to sort.
+ * @higher:  The highest index of the partition to sort.
  * @size:  The size of the whole array.
  *
  * Return: The final index of the pivot element.
@@ -73,7 +73,7 @@ int lomuto_partition(int *array, int lower, int higher, size_t size)
 {
 	int pivot = array[higher];
 	int i = lower - 1, j = lower, temp = 0;
-	
+
 	for (; j < higher; j++)
 	{
 		if (array[j] < pivot)
@@ -88,7 +88,7 @@ int lomuto_partition(int *array, int lower, int higher, size_t size)
 			}
 		}
 	}
-	
+
 	i++;
 	if (i != higher)
 	{
@@ -97,6 +97,6 @@ int lomuto_partition(int *array, int lower, int higher, size_t size)
 		array[higher] = temp;
 		print_array(array, size);
 	}
-	
+
 	return (i);
 }
