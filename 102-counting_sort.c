@@ -51,14 +51,11 @@ void counting_sort(int *array, size_t size)
 	size_t i, j;
 	int max = 0;
 	int *count_array = NULL, *sorted_array = NULL;
-	
+
 	if (size < 2)
 		return;
-	
 	max = _bigest(array, size);
-	
 	count_array = _memset(max + 1);
-	
 	if (count_array == NULL)
 		return;
 
