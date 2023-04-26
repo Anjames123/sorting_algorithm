@@ -1,63 +1,47 @@
 #include "sort.h"
-#include <stdio.h>
 
 /**
- * len_list - find the length of the list.
- *
- * @h: the list.
- * Return: length of the list.
+ * insertion_sort_list - Sorts a doubly linked list of integers in ascending
+ *                         order using the Insertion sort algorithm
+ *                         @list: A pointer to the head of the doubly linked list
  */
-int len_list(listint_t *h)
-{
-	int len = 0;
-
-	while (h != NULL)
-	{
-		len++;
-		h = h->next;
-	}
-	return (len);
-}
-
-/**
- * insertion_sort_list - sortsa doubly linked list of integers in
- *             ascending order using the insertion sort algorithm
- *
- * @list: Pointer to pointer to the head node of the doubky linked list.
- */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *swap;
+	listint_t *curr = (*list)->next;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	current = (*list)->next;
 
-	while (current != NULL)
+	while (curr != NULL)
 	{
-		swap = current;
+		listint_t *prev = curr->prev;
 
-		while (swap->prev != NULL && swap->n < swap->prev->n)
+		while (prev != NULL && prev->n > curr->n)
 		{
-			swap->prev->next = swap->next;
-			if (swap->next != NULL)
-				swap->next->prev = swap->prev;
-			swap->next = swap->prev;
-			swap->prev = swap->prev->prev;
-			swap->next->prev = swap;
+			/* Swap nodes */
+			listint_t *tmp = prev->prev;
 
-			if (swap->prev == NULL)
-				*list = swap;
+			prev->prev = curr;
+			prev->next = curr->next;
 
+			if (curr->next != NULL)
+				curr->next->prev = prev;
+
+			curr->prev = tmp;
+			curr->next = prev;
+
+			if (tmp != NULL)
+				tmp->next = curr;
+			else
+				*list = curr;
+
+			prev = curr->prev;
+
+			/* Print list after each swap */
 			print_list(*list);
-
-
-
 		}
 
-		current = current->next;
+		curr = curr->next;
 	}
-
 }
