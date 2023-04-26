@@ -13,9 +13,9 @@ void qsort_recursive(int *array, int low, int high, size_t size);
 
 void swap(int *a, int *b)
 {
-        int temp = *a;
-        *a = *b;
-        *b = temp;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
 /**
