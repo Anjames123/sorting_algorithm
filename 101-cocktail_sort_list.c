@@ -3,7 +3,7 @@
 /**
  * swap - swaps two adjacent nodes in a doubly linked list
  * @node1: pointer to the first node
- * @node2: pointer to the second node
+ * @node2: pointer to the second node7
  * @list: pointer to the head of the linked list
  * Return: void
  */

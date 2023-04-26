@@ -1,11 +1,11 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swaps two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap - Swaps two integers in an array.
+ * @a: pointer to first integer.
+ * @b: pointer to the integer.
  */
-void swap_ints(int *a, int *b)
+void swap(int *a, int *b)
 {
 	int tmp = *a;
 	*a = *b;
@@ -41,7 +41,7 @@ int hoare_partition(int *array, size_t size, int i, int j)
 
 		if (above < below)
 		{
-			swap_ints(array + above, array + below);
+			swap(array + above, array + below);
 			print_array(array, size);
 		}
 	}

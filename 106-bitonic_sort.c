@@ -3,7 +3,7 @@
 
 /**
  * print_range - prints a range of elements from an array
- * @array: the array
+ * @array: the array to sort
  * @start: the start index of the range to print
  * @end: the end index of the range to print
  */
@@ -23,7 +23,7 @@ void print_range(int *array, int start, int end)
 /**
  * compare_and_swap - swaps two elements in an array
  * if they are in the wrong order
- * @array: the array
+ * @array: the array to sort
  * @i: the first index
  * @j: the second index
  * @direction: the sorting direction
@@ -43,7 +43,7 @@ void compare_and_swap(int *array, int i, int j, int direction)
 /**
  * bitonic_merge - recursively merges two bitonic
  * sequences in the given direction
- * @array: the array
+ * @array: the array to sort
  * @start: the start index of the first bitonic sequence
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
@@ -68,7 +68,7 @@ void bitonic_merge(int *array, int start, int count,
 /**
  * bitonicSort - recursively sorts a bitonic sequence
  * in the given direction
- * @array: the array
+ * @array: the arrayi to sort
  * @start: the start index of the bitonic sequence
  * @count: the length of the bitonic sequence
  * @direction: the sorting direction (1 for ascending, 0 for descending)
