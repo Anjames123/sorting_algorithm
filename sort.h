@@ -24,6 +24,10 @@ typedef struct listint_s
 void print_list(const listint_t *list);
 void print_array(const int *array, size_t size);
 
+/* helper functions */
+int lomuto_partition(int *array, int low, int high, size_t size);
+void quicksort_helper(int *array, int low, int high, size_t size);
+
 /* Sorting Algorithm functions */
 void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
