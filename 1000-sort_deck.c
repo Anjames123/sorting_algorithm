@@ -99,7 +99,7 @@ void sort_deck_by_kind(deck_node_t **deck)
  * smallest to largest value.
  *
  * @deck: A pointer to the head of a deck_node_t doubly-linked list.
- * */
+ */
 void sort_deck_by_value(deck_node_t **deck)
 {
 	deck_node_t *iter, *insert, *tmp;
@@ -126,10 +126,9 @@ void sort_deck_by_value(deck_node_t **deck)
 }
 
 /**
- *
  * sort_deck - Sort a deck of cards by kind (suit) and value (rank).
  * @deck: A pointer to the head of a deck_node_t doubly-linked list.
- * */
+ */
 void sort_deck(deck_node_t **deck)
 {
 	sort_deck_by_value(deck);
